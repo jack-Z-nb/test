@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>实验一</title>
+</head>
+
+<body>
+  <script>
+    //229970442 赵津念
+    //1. 编写代码调用如下函数，将函数调用的代码和结果记录在实验报告中。
+    // function getSum(num1, num2) {
+    //   var sum = num1 + num2;
+    //   console.log(num1 + "+" + num2 + "=" + (num1 + num2));
+    // }
+    //调用函数
+    // getSum(2, 3)
+
+    //229970442 赵津念
+    //2. 运行如下代码，如果运行正确则记录运行结果；如果报错，则修改代
+    // getProduct(2, 4);
+    //错误原因：函数调用写在了函数定义之前
+    //修改：函数调用要在函数定义之后
+    // var getProduct = function (num1, num2) {
+    //   console.log(num1 + "*" + num2 + "=" + num1 * num2);
+    // }
+    // getProduct(2, 4);
+
+    //229970442 赵津念
+    //3. 先阅读如下代码，思考输出的结果是什么？运行并记录输出结果。
+    // var a = 100;
+    // function test() {
+    //   console.log(a);//1 结果是100
+    //   a = 10;
+    //   console.log(a);//2 结果是10
+    // }
+    // test();
+    // console.log(a)//3 结果是10
+
+    //229970442 赵津念
+    //4. 先阅读如下代码，思考输出的结果是什么？运行并记录输出结果。
+    // var a = 10;
+    // function test() {
+    //   // var a;
+    //   var b = 20;
+    //   console.log(a);//undefine 变量提升
+    //   console.log(b);//20
+    //   // a=30;
+    //   var a = 30;
+    // }
+    // test()
+
+    //229970442 赵津念
+    //5. 运行如下代码，看看是否报错。
+    //没有错误
+    // function fun2(a, b) {
+    //   console.log(arguments[0]);
+    //   console.log(arguments[1]);
+    //   console.log(arguments[2]);
+    // }
+    // fun2(1, 2, 3);
+
+
+    //229970442 赵津念
+    //6.尝试用for … in 的循环语句打印输出第5步中fun2调用时的参数，将记录实验代码。
+    // function fun2(a, b) {
+    //   for (let i in arguments) {
+    //     console.log(arguments[i])
+    //   }
+    // }
+    // fun2(1, 2, 3)
+
+    //229970442 赵津念
+    //7.运行如下代码，并记录输出结果和原因。
+    //原因：严格模式下给未声明的变量赋值会导致错误 
+    // "use strict";
+    // num = 100;
+    // console.log(num);
+
+    //229970442 赵津念
+    //8.自行编写一段严格模式下报错的代码，记录代码并说明报错原因。
+    //原因：在严格模式下类数组arguments不能赋值
+    // function fun() {
+    //   "use strict"
+    //   arguments = 1
+    //   console.log(arguments)
+    // }
+    // fun()
+
+    
+    //229970442 赵津念
+    //9.为第8步中的错误代码添加try…catch语句块，友好显示错误信息。 
+    // function fun() {
+    //   "use strict";
+    //   try {
+    //     arguments = 1;
+    //     console.log(arguments);
+    //   } catch (error) {
+    //     console.error("发生错误：", error.message);
+    //   }
+    // }
+    // fun();
+  </script>
+</body>
+
+</html>
