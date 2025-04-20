@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>用户注册</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 400px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .form-group input:focus {
+      border-color: #007bff;
+      outline: none;
+    }
+
+    .form-group button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .form-group button:hover {
+      background-color: #0056b3;
+    }
+
+    .captcha {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .captcha input {
+      margin-left: 10px;
+    }
+
+    .agree {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .agree input {
+      margin-right: 5px;
+    }
+
+    .agree a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .agree a:hover {
+      text-decoration: underline;
+    }
+
+    .error {
+      color: red;
+      font-size: 12px;
+      margin-top: 5px;
+    }
+
+    .agreement {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 15px;
+    }
+
+    .agreement label {
+      margin-left: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2>用户注册</h2>
+    <form class="cmxform" id="signupForm" method="get" action="">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" name="username" placeholder="您的用户名和登录名" required>
+      </div>
+      <div class="form-group">
+        <label for="password">设置密码</label>
+        <input type="password" name="password" placeholder="建议至少使用两种字符组合" required>
+      </div>
+      <div class="form-group">
+        <label for="qzpassword">确认密码</label>
+        <input type="password" name="qzpassword" id="password" placeholder="请再次输入密码" required>
+      </div>
+      <div class="form-group">
+        <label for="phone">手机号</label>
+        <input type="text" name="phone" placeholder="建议使用常用手机号" required>
+      </div>
+      <div class="form-group captcha">
+        <div id="mpanel2"
+          style="display:inline-block; font-size: 20px; font-weight: bold; color: #333; margin-right: 10px; padding: 5px 10px; background-color: #f9f9f9; border: 1px solid #ddd; border-radius: 5px; cursor: pointer;"
+          onclick="generateNewCaptcha()">
+          64J1
+        </div>
+        <input type="text" name="yanz" placeholder="请输入验证码" required>
+        <div class="error" id="captcha-error"></div>
+      </div>
+      <div class="form-group agreement">
+        <input type="checkbox" class="checkbox" id="agree" name="agree" required>
+        <label for="agree">阅读并同意
+          <a href="#">《京东用户注册协议》</a> 和
+          <a href="#">《隐私政策》</a>
+        </label>
+      </div>
+      <div class="form-group">
+        <button type="submit">立即注册</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#signupForm").validate({
+        rules: {
+          username: {
+            required: true,
+            minlength: 3,
+            maxlength: 15,
+          },
+          password: {
+            required: true,
+            minlength: 6,
+            maxlength: 18,
+          },
+          qzpassword: {
+            required: true,
+            equalTo: "#password",
+          },
+          phone: {
+            required: true,
+            digits: true,
+            minlength: 11,
+            maxlength: 11,
+          },
+          yanz: {
+            required: true,
+            minlength: 4,
+            maxlength: 6,
+          },
+          agree: {
+            required: true,
+          },
+        },
+        messages: {
+          username: {
+            required: "请输入用户名",
+            minlength: "用户名至少需要3个字符",
+            maxlength: "用户名最多15个字符",
+          },
+          password: {
+            required: "请输入密码",
+            minlength: "密码至少需要6个字符",
+            maxlength: "密码最多18个字符",
+          },
+          qzpassword: {
+            required: "请再次输入密码",
+            equalTo: "两次输入的密码不一致",
+          },
+          phone: {
+            required: "请输入手机号",
+            digits: "手机号必须是数字",
+            minlength: "手机号必须是11位",
+            maxlength: "手机号必须是11位",
+          },
+          yanz: {
+            required: "请输入验证码",
+            minlength: "验证码至少需要4位",
+            maxlength: "验证码最多6位",
+          },
+          agree: {
+            required: "请阅读并同意相关协议",
+          },
+        },
+        submitHandler: function (form) {
+          checkCaptcha();
+        },
+      });
+
+      function checkCaptcha() {
+        const userCaptcha = $('#signupForm input[name="yanz"]').val();
+        const correctCaptcha = $('#mpanel2').text();
+        const errorDiv = $('#captcha-error');
+        if (userCaptcha === correctCaptcha) {
+          errorDiv.text('');
+          alert('注册成功！');
+          form.submit();
+        } else {
+          errorDiv.text('验证码不匹配，请重新输入。');
+          generateNewCaptcha();
+        }
+      }
+
+      // 生成新的验证码
+      function generateNewCaptcha() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let captcha = '';
+        for (let i = 0; i < 4; i++) {
+          captcha += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        $('#mpanel2').text(captcha);
+      }
+
+      $('#mpanel2').click(function () {
+        generateNewCaptcha();
+      });
+    });
+  </script>
+</body>
+
+</html>

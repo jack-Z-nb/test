@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //  1.JavaScript 提供了一些内置函数，用以实现对数据类型的转换、判断等
+    //   效果，请运行如下代码，记录其结果，并思考原因。
+    // 229970442 赵津念
+    // console.log(Number(true), Number(null), +undefined);
+    // console.log(Boolean('100', Boolean(100), Boolean(null), !!undefined));
+    // console.log(parseInt(126.6), parseInt(0b1011011), parseInt(0x2A, 8))
+    // console.log(parseFloat('123.6'), parseFloat('100px'), parseFloat(010));
+    // console.log('87*99+2')
+    // console.log(isNaN(null), isNaN('123'), isNaN('abc'), isNaN('a1b2c3'))
+
+    //2. Array 在JavaScript 中表示数组，可以使用字面量和构造函数两种方式
+    // 创建。 
+    // 229970442 赵津念
+    // 2.1
+    //     var arr1 = [];
+    //     console.log(arr1, arr1.length); 
+    //     var arr2 = [1, 2, 3];
+    //     console.log(arr2[0], arr2.length);  
+    //     var arr3 = new Array();
+    //     console.log(arr3[1], arr3.length);  
+    //  //2.2
+    //     arr2.shift();
+    //     console.log(arr2, arr2.length);  
+
+
+    //  3.Date 在JavaScript 中表示日期和时间，使用new Date()即可获得当前的
+    // 日期和时间，Date对象有很多与日期和时间相关的方法，请查阅如下
+    // 地址的资料：https://www.runoob.com/jsref/jsref-obj-date.html，写出代
+    // 码显示目前是几点几分？效果如下： 
+    //229970442 赵津念
+    // var d = new Date();
+    // var hours = d.getHours();
+    // var minutes = d.getMinutes();
+    // console.log(hours + ":" + minutes);
+
+
+    // 4. RegExp 在JavaScript 中表示正则表达式 
+    //229970442 赵津念
+    //     var reg1 = /^\d{4}$/;
+    //     console.log(reg1.test('1234'), reg1.test('1a34'), reg1.test(12345))
+
+    //     var reg2 = new RegExp("^[sp]\\d{1,4}$", "i")
+    //     console.log(reg2.test('p123'),
+    //       reg2.test('1234'),
+    //       reg2.test('s10')
+    //     )
+    //     // 定义正则表达式
+    // var regex = /^(133|153|189|180)\d{8}$/;
+
+    // // 测试案例
+    // var testNumbers = [
+    //     "13312345678", // 中国电信
+    //     "15312345678", // 中国电信
+    //     "13912345678", // 中国移动
+    //     "13012345678", // 中国联通
+    //     "1331234567",  // 不符合格式（少一位）
+    //     "133123456789" // 不符合格式（多一位）
+    // ];
+
+    // // 测试每个号码
+    // testNumbers.forEach(function(number) {
+    //     if (regex.test(number)) {
+    //         console.log(number + " 是中国电信的手机号码。");
+    //     } else {
+    //         console.log(number + " 不是中国电信的手机号码。");
+    //     }
+    // });
+
+    // 5.String 在基本数据类型string的对象表达，它拥有更多的对字符串进行
+    // 操作的属性和方法。
+    //229970442 赵津念
+    // var str = new String('112346@qq.com');
+    // var index = str.indexOf('@');
+    // if (index !== -1) {
+    //   var username = str.substring(0, index);
+    //   console.log(username)
+    // }
+
+    //    6. Math对象有很多与数学相关的属性和方法，可以直接使用。请查阅如
+    // 下地址的资料，https://www.runoob.com/jsref/jsref-obj-math.html，编
+    // 写代码实现随机产生1、2、3中的任意一个整数，写出测试案例。
+    //229970442 赵津念
+
+    // function getRandomInt() {
+    //   return Math.floor(Math.random() * 3) + 1;
+    // }
+    // console.log(getRandomInt());
+
+    // 7. 思考如下代码的运行结果，运行验证。
+    //229970442 赵津念
+    var x = 1;
+    function A(y) {
+      var x = 2
+      function B(z) {
+        console.log(x + y + z);
+      }
+      return B
+    }
+    var C = A(2);
+    C(3)
+  </script>
+</body>
+
+</html>

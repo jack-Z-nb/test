@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jQuery 游戏角色控制</title>
+  <style>
+    #game-container {
+      position: relative;
+      width: 800px;
+      height: 600px;
+      border: 1px solid #000;
+      overflow: hidden;
+      background-color: black;
+    }
+
+    #player,
+    .treasure {
+      position: absolute;
+      cursor: pointer;
+    }
+
+    .treasure {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="game-container">
+    <img id="player" src="player_big.gif" alt="Player">
+    <img class="treasure" src="1.jpeg" alt="Treasure" style="display:none;">
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    //229970442 赵津念
+    $(document).ready(function () {
+      var player = $('#player');
+      var treasure = $('.treasure');
+      var speed = 2; // 移动速度
+      var gameContainer = $('#game-container');
+      var containerWidth = gameContainer.width();
+      var containerHeight = gameContainer.height();
+      // 初始化玩家位置
+      player.css({
+        left: '0px',
+        top: '0px'
+      });
+      // 显示宝箱在右下角并调整大小
+      treasure.css({
+        left: (containerWidth - 50) + 'px',
+        top: (containerHeight - 50) + 'px',
+        width: '50px',
+        height: '50px',
+        display: 'block'
+      });
+      // 键盘控制（使用WASD键）
+      $(document).keydown(function (e) {
+        var dx = 0, dy = 0;
+        if (e.key.toLowerCase() === 'a') { // A键（左移）
+          dx = -speed;
+        } else if (e.key.toLowerCase() === 'w') { // W键（上移）
+          dy = -speed;
+        } else if (e.key.toLowerCase() === 'd') { // D键（右移）
+          dx = speed;
+        } else if (e.key.toLowerCase() === 's') { // S键（下移）
+          dy = speed;
+        }
+        movePlayer(dx, dy);
+      });
+      //229970442 赵津念
+      // 鼠标点击控制
+      gameContainer.click(function (e) {
+        var rect = gameContainer[0].getBoundingClientRect();
+        var centerX = rect.left + rect.width / 2;
+        var centerY = rect.top + rect.height / 2;
+        var dx = e.clientX - centerX;
+        var dy = e.clientY - centerY;
+        movePlayer(dx, dy);
+      });
+      function movePlayer(dx, dy) {
+        var currentLeft = parseInt(player.css('left')) || 0;
+        var currentTop = parseInt(player.css('top')) || 0;
+        var newX = Math.min(containerWidth - player.width(), Math.max(0, currentLeft + dx));
+        var newY = Math.min(containerHeight - player.height(), Math.max(0, currentTop + dy));
+        player.css({
+          left: newX + 'px',
+          top: newY + 'px'
+        });
+        checkCollision();
+      }
+      function checkCollision() {
+        var playerLeft = parseInt(player.css('left')) || 0;
+        var playerTop = parseInt(player.css('top')) || 0;
+        var playerWidth = player.width();
+        var playerHeight = player.height();
+        var treasureLeft = parseInt(treasure.css('left')) || 0;
+        var treasureTop = parseInt(treasure.css('top')) || 0;
+        var treasureWidth = treasure.width();
+        var treasureHeight = treasure.height();
+        // 碰撞检测
+        if (playerLeft < treasureLeft + treasureWidth &&
+          playerLeft + playerWidth > treasureLeft &&
+          playerTop < treasureTop + treasureHeight &&
+          playerTop + playerHeight > treasureTop) {
+          alert('恭喜获得奖励！');
+          treasure.remove(); // 移除宝箱
+        }
+      }
+      //229970442 赵津念
+      var doubleClick = false;
+      $('#player').dblclick(function () {
+        doubleClick = !doubleClick;
+        var src = doubleClick ? 'player1.gif' : 'player_big.gif';
+        player.attr('src', src);
+      });
+    });
+  </script>
+</body>
+
+</html>
